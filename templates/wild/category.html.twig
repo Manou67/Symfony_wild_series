@@ -5,14 +5,18 @@
 
 {% block body %}
     <h1>Les trois dernières séries de la catégorie {{ category.name }} : </h1>
-    {% for program in programs %}
-        <div>
-            <h2>{{ program.id }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
-            <p>{{ program.summary }}</p>
-        </div>
-    {% else %}
-        Aucune série trouvée.
-    {% endfor %}
+    <div class="row">
+        {% for program in programs %}
+            <div class="col-md-3 card">
+                <h2 class="card-title">{{ program.id }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
+                <div class="card-body">
+                <p class="card-text">{{ program.summary }}</p>
+            </div>
+            </div>
+        {% else %}
+            Aucune série trouvée.
+        {% endfor %}
+    </div>
     <a href="{{ path('app_index') }}">
         Retour à l'accueil
     </a>

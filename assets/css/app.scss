@@ -1,5 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
-@import "variables.scss";
+@import "_variables.scss";
 
 @mixin title {
     font-family: 'Sigmar One', cursive;
@@ -12,11 +12,6 @@ nav
     margin: auto;
 }
 
-.navbar navbar-expand-lg {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
 nav>a {
     padding: 5px;
     text-align: center;

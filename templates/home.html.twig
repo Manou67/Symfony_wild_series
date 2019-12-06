@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
-    <h1>Bienvenue sur Wild Series !</h1>
+{% block title %}
+    Wild séries, le meilleur site web sur les séries tv
+{% endblock %}
 
-    <a href="{{ path('wild_show', {'slug':"ma-superbe-serie"}) }}">Afficher ma série</a>
+{% block body %}
+    <div class="container w-75 p-3 mt-2">
+        <h1>Bienvenue sur Wild Séries !</h1>
+        <p>Wild séries est votre meilleur allié pour trouver vos séries préférées !</p>
+        <p>Vous pouvez gérer votre planning, partager vos derniers épisodes regardés, et découvrer des nouveautés...et bien d'autres choses !</p>
+        <p>Vous êtes en plus entouré de la plus grosse communauté de wilders qui vous conseilleront sur les séries les plus wild à regarder !</p>
+    </div>
 
 {% endblock %}
