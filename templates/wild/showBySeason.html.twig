@@ -16,10 +16,11 @@
 </div>
 {% endfor %}
     <div>
-     <a href="{{ path('wild_episode', {'episode' : program.id}) }}" class="btn btn-dark">Voir les épisodes</a>
+        <h4>Retrouvez ici la liste complète de toutes les saisons proposées sur notre site :</h4>
+        <a href="{{ path('season_index')}}" class="btn btn-dark mb-lg-2">Voir la liste complète</a>
     </div>
     <div>
-        <a href="{{ path('wild_program', {'slug' : program.title|lower|replace({' ': "-"})}) }}" class="btn btn-dark">Voir le programme</a>
+     <a href="{{ path('wild_episode', {'episode' : program.id}) }}" class="btn btn-dark">Voir les épisodes</a>
     </div>
     <div>
         <a href="{{ path('wild_index') }}">Retour à la liste des séries</a>

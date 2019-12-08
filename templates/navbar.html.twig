@@ -2,8 +2,16 @@
     <a class="nav-link bigtitle" href="{{ path('app_index') }}">Wild series</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('wild_index') }}">Nos séries</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Nos séries
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('wild_index') }}">Le top 10 des séries</a>
+                    <a class="dropdown-item" href="{{ path('program_index')}}">Voir la liste des séries</a>
+                    <a class="dropdown-item" href="{{ path('season_index')}}">Voir la liste des saisons</a>
+                    <a class="dropdown-item" href="{{ path('episode_index')}}">Voir la liste des épisodes</a>
+                </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -12,7 +20,6 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ path('show_category', { 'categoryName': "horreur" }) }}">Horreur</a>
                     <a class="dropdown-item" href="{{ path('category_add') }}">Ajouter une catégorie</a>
-
                 </div>
             </li>
             <li class="nav-item dropdown">
