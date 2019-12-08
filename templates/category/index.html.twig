@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les catégories{% endblock %}
+
+{% block body %}
+
+<h2>Voici les catégories disponibles sur Wild séries :</h2>
+{% for category in categories %}
+    <h4> {{ loop.index }}.{{ category.name }}</h4>
+{% endfor %}
+</div>
+<div class="text-left m-4 w-25">
+   <h4 class="text-left">Ajouter une catégorie</h4>
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    <button class="btn btn-dark">{{ button_label|default('Ajouter') }}</button>
+    {{ form_end(form) }}
+    <div>
+{% endblock %}
