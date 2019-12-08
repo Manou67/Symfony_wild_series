@@ -3,22 +3,21 @@
 {% block title %}Toutes nos séries{% endblock %}
 
 {% block body %}
-    <h1>Retrouvez toutes les séries disponibles sur notre site : </h1>
-        <div class="row">
+    <h1 class="titreh1">Retrouvez toutes les séries disponibles sur notre site : </h1>
+        <div class="row justify-content-center">
             {% for program in programs %}
-                <div class="col-md-3 card">
-                    <img src="{{ program.poster }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ program.title }} </h4>
+                <div class="col-sm-4 card align-items-center">
+                    <div class="card-body w-50">
+                        <img src="{{ program.poster }}" class="card-img-top" alt="poster des séries">
+                            <h4 class="card-title">{{ loop.index }} / {{ program.title }} </h4>
                             <p class="card-text">Catégorie : {{ program.category.name }}</p>
-                            <p class="card-text">{{ program.summary}}</p>
-                            <a href="{{ path('wild_season', {'id': program.id }) }}" class="btn btn-dark">Voir les épisodes</a>
-                        </div>
+                        <a href="{{ path('wild_program', {'slug' : program.title|lower|replace({' ': "-"})}) }}" class="btn btn-dark">Voir le programme</a>
+                    </div>
                 </div>
     {% else %}
         Aucune série trouvée.
     {% endfor %}
-    </div>
+        </div>
 
     <a href="{{ path('wild_index') }}">
         Retour à l'accueil

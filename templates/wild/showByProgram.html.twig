@@ -6,20 +6,14 @@
     <div class="media">
         <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
         <div class="media-body">
-            <h1 class="mt-0">Voici la liste des épisodes de la série {{ program.title }}</h1>
+            <h1 class="main_title">La série {{ program.title }}</h1>
             <p>Categorie : {{ program.category.name }}</p>
-            {% for season in seasons %}
-        <div>
-            <h2>Saison n°{{ season.number }} - année de sortie : {{ season.year }}</h2>
+            <h3>Résumé du programme :</h3>
             <p>{{ program.summary }}</p>
-        </div>
-        <div>
-            <a href="{{ path('wild_season', {'slug' : slug, 'id' : season.id}) }}">{{ season.number }}</a>
-        </div>
-    {% else %}
-        Aucune série trouvée.
-    {% endfor %}
-    <a href="{{ path('wild_index') }}">
-        Retour à l'accueil
-    </a>
+
+            <a href="{{ path('wild_season', {'id' : program.id }) }}" class="btn btn-dark">Voir les saisons</a>
+<div>
+    <a href="{{ path('wild_index') }}">Retour à la liste des séries</a>
+</div>
+
 {% endblock %}

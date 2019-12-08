@@ -6,20 +6,24 @@
 
 <div class="media">
     <div class="media-body">
-        <h1 class="mt-0">{{ program.title }}</h1>
-        <p>Liste des épisodes : </p>
-            {% for episode in episodes %}
-                <div>
-                    <h2>Episode n°{{ episode.number }} - {{ episode.title }} </h2>
-                    <h4>{{ episode.synopsis }}</h4>
-                    <a href="{{ path('wild_season', {'id':  program.id }) }}">Voir la liste des saisons</a>
-                </div>
-            {% endfor %}
+        <h2>Liste des saisons : </h2>
+        {% for episodes in episodes %}
+            <div>
+                <h2>Saison n°{{ season.number }} - année de sortie : {{ season.year }}</h2>
+                <p>{{ season.description }}</p>
+            </div>
     </div>
 </div>
-    <a href="{{ path('wild_index') }}">
-        Retour à l'accueil des séries
-    </a>
+{% endfor %}
+    <div>
+     <a href="{{ path('wild_episode', {'episode' : program.id}) }}" class="btn btn-dark">Voir les épisodes</a>
+    </div>
+    <div>
+        <a href="{{ path('wild_program', {'slug' : program.title|lower|replace({' ': "-"})}) }}" class="btn btn-dark">Voir le programme</a>
+    </div>
+    <div>
+        <a href="{{ path('wild_index') }}">Retour à la liste des séries</a>
+    </div>
 
 {% endblock %}
 
