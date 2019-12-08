@@ -4,13 +4,6 @@
 {% block title %}Three last programs{% endblock %}
 
 {% block body %}
-    <div>
-        <a href="{{ path('category_add') }}">Ajouter une catégorie</a>
-    </div>
-
-    <a href="{{ path('wild_season', {'id' : program.id }) }}" class="btn btn-dark">Voir les saisons</a>
-
-
     <h1 class="titreh1">Les trois dernières séries de la catégorie {{ category.name }} : </h1>
     <div class="row">
         {% for program in programs %}
