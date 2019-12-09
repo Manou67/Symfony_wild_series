@@ -20,7 +20,7 @@
         {% for program in programs %}
             <tr>
                 <td>{{ program.id }}</td>
-                <td>{{ program.title }}</td>
+                <td><a href="{{ path('program_show', {'id': program.id}) }}">{{ program.title }}</td>
                 <td>{{ program.summary }}</td>
                 <td>{{ program.poster }}</td>
                 <td>

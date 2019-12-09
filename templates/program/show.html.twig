@@ -3,7 +3,7 @@
 {% block title %}Séries{% endblock %}
 
 {% block body %}
-    <h1>Séries</h1>
+    <h1>Série</h1>
 
     <table class="table">
         <tbody>
@@ -25,6 +25,15 @@
             </tr>
         </tbody>
     </table>
+
+    <strong>Acteurs :</strong>
+    <ul>
+        {% for actor in program.actors %}
+            <li><a href="{{ path('actor_show', {'id': actor.id}) }}">{{ actor.name }}</a></li>
+        {% else %}
+            <li>Aucun acteur pour cette série</li>
+        {% endfor %}
+    </ul>
 
     <a href="{{ path('program_index') }}">Retour à la liste</a>
 

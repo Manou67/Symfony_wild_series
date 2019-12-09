@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acteurs{% endblock %}
+
+{% block body %}
+    <h1>Acteur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ actor.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom de l'acteur</th>
+                <td>{{ actor.name }}</td>
+            <tr>
+                <th>Nom des séries</th>
+                {% for program in programs %}
+                <td><a href="{{ path('wild_program', {'slug' : program.title|lower|replace({' ': "-"})}) }}">{{ program.title }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+<div>
+    <a href="{{ path('actor_index') }}">Retour à la liste</a>
+</div>
+<div>
+       <a href="{{ path('actor_edit', {'id': actor.id}) }}">Editer</a>
+</div>
+    {{ include('actor/_delete_form.html.twig') }}
+{% endblock %}
