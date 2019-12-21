@@ -6,9 +6,13 @@ use App\Entity\Program;
 use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
 use App\Service\Slugify;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -32,9 +36,11 @@ class ProgramController extends AbstractController
      * @Route("/new", name="program_new", methods={"GET","POST"})
      * @param Request $request
      * @param Slugify $slugify
+     * @param MailerInterface $mailer
      * @return Response
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
-    public function new(Request $request, Slugify $slugify): Response
+    public function new(Request $request, Slugify $slugify, MailerInterface $mailer): Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
@@ -47,13 +53,30 @@ class ProgramController extends AbstractController
             $entityManager->persist($program);
             $entityManager->flush();
 
+            $mailer_from = $this->getParameter('mailer_from');
+            $program_name = $program->getTitle();
+            $program_summary = $program->getSummary();
+
+            $email = (new TemplatedEmail())
+                ->from($mailer_from)
+                ->to(new Address('emmanuelle.buono@hotmail.fr'))
+                ->subject('Une nouvelle série a été publiée en ligne !')
+                ->htmlTemplate('program/email/notification.html.twig')
+                ->context([
+                    'program_name' => $program_name,
+                    'program_summary' => $program_summary,
+                ]);
+
+            $mailer->send($email);
             return $this->redirectToRoute('program_index');
+
         }
 
-        return $this->render('program/new.html.twig', [
-            'program' => $program,
-            'form' => $form->createView(),
-        ]);
+            return $this->render('program/new.html.twig', [
+                'program' => $program,
+                'form' => $form->createView(),
+            ]);
+
     }
 
     /**

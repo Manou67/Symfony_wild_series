@@ -1,0 +1,20 @@
+{% apply inline_css %}
+<style>
+    h1 {
+        color: #ff5733 ;
+    }
+    p {
+        color: #737272  ;
+    }
+</style>
+{% block body %}
+    <h1>Nouvelle série en ligne !</h1>
+    <p>Bonjour !</p>
+    <p>Nous avons publié une nouvelle série en ligne : {{ program_name }} </p>
+    <p> Le résumé est le suivant : {{ program_summary }}</p>
+    <p>Nous vous invitons à venir la découvrir sur notre site :</p>
+    <a href="https://127.0.0.1:8000/program/"> En voir plus</a>
+
+{% endblock %}
+
+{% endapply %}
