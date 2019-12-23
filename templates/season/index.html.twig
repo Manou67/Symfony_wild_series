@@ -3,8 +3,10 @@
 {% block title %}Liste des saisons{% endblock %}
 
 {% block body %}
-    <h1>Liste des saisons</h1>
+    <h1 style="margin: 30px;">Liste des saisons</h1>
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('season_new') }}">Ajouter une nouvelle saison</a>
+    {% endif %}
 
     <table class="table">
         <thead>
@@ -25,7 +27,9 @@
                 <td>{{ season.description }}</td>
                 <td>
                     <a href="{{ path('season_show', {'id': season.id}) }}">Voir</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('season_edit', {'id': season.id}) }}">Editer</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

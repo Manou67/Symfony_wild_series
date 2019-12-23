@@ -8,6 +8,7 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class CommentController extends AbstractController
     /**
      * @Route("/", name="comment_index", methods={"GET"})
      * @param CommentRepository $commentRepository
+     * @param EpisodeRepository $episodeRepository
      * @return Response
      */
     public function index(CommentRepository $commentRepository, EpisodeRepository $episodeRepository): Response
@@ -37,7 +39,6 @@ class CommentController extends AbstractController
      * Require IS_AUTHENTICATED_ANONYMOUSLY for only this controller method.
      * @param Request $request
      * @param Episode $episode
-     * @param User $author
      * @return Response
      */
 
@@ -46,7 +47,6 @@ class CommentController extends AbstractController
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment, ['method' => Request::METHOD_POST]);
         $form->handleRequest($request);
-        var_dump($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
@@ -98,15 +98,23 @@ class CommentController extends AbstractController
 
     /**
      * @Route("/{id}", name="comment_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_SUBSCRIBER")
+     * @param Request $request
+     * @param Comment $comment
+     * @return Response
      */
     public function delete(Request $request, Comment $comment): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($comment);
-            $entityManager->flush();
-        }
+/*        $author = $comment->getAuthor();
+        $user = $request->getUser();
 
-        return $this->redirectToRoute('comment_index');
+        if ($user == $author) {*/
+            if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($comment);
+                $entityManager->flush();
+            }
+
+        return $this->redirectToRoute('episode_index');
     }
 }

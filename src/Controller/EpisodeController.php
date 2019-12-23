@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Episode;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Form\EpisodeType;
 use App\Repository\EpisodeRepository;
@@ -61,11 +62,13 @@ class EpisodeController extends AbstractController
 
     /**
      * @Route("/{slug}", name="episode_show", methods={"GET", "POST"})
+     * @param Episode $episode
+     * @param Request $request
+     * @return Response
      */
     public function show(Episode $episode, Request $request): Response
     {
         $comment = new Comment();
-
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 

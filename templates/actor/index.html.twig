@@ -3,7 +3,10 @@
 {% block title %}Liste des acteurs{% endblock %}
 
 {% block body %}
-    <h1>Liste des acteurs :</h1>
+    <h1 style="margin: 30px;">Liste des acteurs :</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('actor_new') }}">Ajouter un nouvel acteur</a>
+    {% endif %}
 
     <table class="table">
         <thead>
@@ -19,8 +22,10 @@
                 <td>{{ actor.id }}</td>
                 <td><a href="{{ path('actor_show', {'slug': actor.slug}) }}">{{ actor.name }}</td>
                 <td>
-                    <a href="{{ path('actor_show', {'slug': actor.slug}) }}">show</a>
-                    <a href="{{ path('actor_edit', {'slug': actor.slug}) }}">edit</a>
+                    <a href="{{ path('actor_show', {'slug': actor.slug}) }}">Voir</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('actor_edit', {'slug': actor.slug}) }}">Editer</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -31,5 +36,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('actor_new') }}">Ajouter un nouvel acteur</a>
 {% endblock %}

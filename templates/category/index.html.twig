@@ -4,16 +4,20 @@
 
 {% block body %}
 
-<h2>Voici les catégories disponibles sur Wild séries :</h2>
+<h2 style="margin: 30px;">Voici les catégories disponibles sur Wild séries :</h2>
 {% for category in categories %}
-    <h4> {{ loop.index }}.{{ category.name }}</h4>
+    <h4 style="margin-left: 30px;"> {{ loop.index }}/ {{ category.name }}</h4>
 {% endfor %}
 </div>
-<div class="text-left m-4 w-25">
-   <h4 class="text-left">Catégorie</h4>
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    <button class="btn btn-dark">{{ button_label|default('Ajouter') }}</button>
-    {{ form_end(form) }}
-    <div>
+
+{% if is_granted('ROLE_ADMIN') %}
+        <div class="text-left m-4 w-25">
+            <h4 class="text-left">Catégorie</h4>
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <button class="btn btn-dark">{{ button_label|default('Ajouter') }}</button>
+            {{ form_end(form) }}
+        <div>
+{% endif %}
+
 {% endblock %}

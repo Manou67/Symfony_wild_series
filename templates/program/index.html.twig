@@ -3,8 +3,10 @@
 {% block title %}Liste des séries{% endblock %}
 
 {% block body %}
-    <h1>Liste des séries</h1>
+    <h1 style="margin: 30px;">Liste des séries</h1>
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('program_new') }}">Ajouter une nouvelle série</a>
+    {% endif %}
 
     <table class="table">
         <thead>
@@ -26,7 +28,9 @@
 
                 <td>
                     <a href="{{ path('program_show', {'slug': program.slug}) }}">Voir</a>
-                    <a href="{{ path('program_edit', {'slug': program.slug}) }}">Editer</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('program_edit', {'slug': program.slug}) }}">Editer</a>
+                    {%endif%}
                 </td>
 
             </tr>

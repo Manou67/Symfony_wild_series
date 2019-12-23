@@ -3,29 +3,33 @@
 {% block title %}Liste des épisodes{% endblock %}
 
 {% block body %}
-    <h1>Liste des épisodes</h1>
+    <h1 style="margin: 30px;">Liste des épisodes</h1>
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('episode_new') }}">Ajouter un nouvel épisode</a>
+    {% endif %}
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Titre</th>
                 <th>Episode n°</th>
                 <th>Synopsis</th>
+                <th>Nom de la série</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for episode in episodes %}
             <tr>
-                <td>{{ episode.id }}</td>
                 <td>{{ episode.title }}</td>
                 <td>{{ episode.number }}</td>
                 <td>{{ episode.synopsis }}</td>
+                <td>{{ episode.season.program.title }}</td>
                 <td>
                     <a href="{{ path('episode_show', {'slug': episode.slug}) }}">Voir</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">Editer</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

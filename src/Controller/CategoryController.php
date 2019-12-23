@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,7 @@ class CategoryController extends AbstractController
 {
      /**
      *@Route("/add", name="category_add", methods="GET|POST")
+     * @IsGranted("ROLE_SUBSCRIBER")
      */
 
     public function add(Request $request, CategoryRepository $categoryRepository)
