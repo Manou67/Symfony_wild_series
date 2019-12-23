@@ -16,19 +16,49 @@
                 <td>{{ episode.title }}</td>
             </tr>
             <tr>
-                <th>Numéro</th>
+                <th>Episode n°</th>
                 <td>{{ episode.number }}</td>
             </tr>
             <tr>
                 <th>Synopsis</th>
                 <td>{{ episode.synopsis }}</td>
             </tr>
+            <tr>
+                <th>Série</th>
+                <td>{{ episode.season.program.title }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('episode_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">Editer</a>
+    {% if user is not null %}
+        <div class="container-fluid" style="background-color: #dcdcdc73">
+            <h2>Ajouter un commentaire :</h2>
+            {{ form_start(form) }}
+            <div class="my-custom-class-for-errors">
+                {{ form_errors(form) }}
+            </div>
 
-    {{ include('episode/_delete_form.html.twig') }}
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.comment) }}
+                </div>
+                <div class="col"
+                {{ form_row(form.rate) }}
+            </div>
+            <button class="btn">{{ button_label|default('Ajouter') }}</button>
+            {{ form_end(form) }}
+        </div>
+    {% endif %}
+
+<div class="mt-5 container-fluid" style="background-color: #dcdcdc73">
+    <h2>Commentaires</h2>
+    <ul>
+        {% for comment in episode.comments|sort %}
+            <li>{{ comment.comment }}</li>
+            <p style="font-style: italic;">Commentaire laissé par {{ comment.author.username }}</p><br>
+
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

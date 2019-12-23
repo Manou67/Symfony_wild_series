@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des commentaires{% endblock %}
+
+{% block body %}
+    <h1>Liste des commentaires</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Commentaires</th>
+                <th>Numéro de la saison</th>
+                <th>Numéro de l'épisode</th>
+                <th>Nom de l'épisode</th>
+                <th>Evaluations</th>
+                <th>Ajouté par</th>
+                <th>Nom de la série</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments | sort %}
+            <tr>
+                <td>{{ comment.comment }}</td>
+                <td>Saison n° {{ comment.episode.season.number }}</td>
+                <td>Episode n° {{ comment.episode.number }}
+                <td>{{ comment.episode.title }}
+                <td>{{ comment.rate }}</td>
+                <td>{{ comment.author.username }}</td>
+                <td>{{ comment.episode.season.program.title }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun commentaire trouvé...</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

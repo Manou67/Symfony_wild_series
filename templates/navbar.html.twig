@@ -11,6 +11,7 @@
                     <a class="dropdown-item" href="{{ path('program_index')}}">Voir la liste des séries</a>
                     <a class="dropdown-item" href="{{ path('season_index')}}">Voir la liste des saisons</a>
                     <a class="dropdown-item" href="{{ path('episode_index')}}">Voir la liste des épisodes</a>
+                    <a class="dropdown-item" href="{{ path('comment_index')}}">Voir la liste des commentaires</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -33,6 +34,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link bigtitle" href="#">Mes favoris</a>
+            </li>
+            <li class="login_text">
+                {% if app.user %}
+                    <p class="login_text">{{ app.user.email }}</p>
+                    <a class="login_text" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                {% else %}
+                    <a class="login_text" href="{{ path('app_login') }}"> Se connecter</a>
+                {% endif %}
             </li>
         </ul>
     </div>

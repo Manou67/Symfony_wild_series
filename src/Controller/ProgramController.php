@@ -69,9 +69,7 @@ class ProgramController extends AbstractController
 
             $mailer->send($email);
             return $this->redirectToRoute('program_index');
-
         }
-
             return $this->render('program/new.html.twig', [
                 'program' => $program,
                 'form' => $form->createView(),

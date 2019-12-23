@@ -19,18 +19,18 @@ nav>a {
 
 .nav-link{
     @include title;
-    font-size: 2em;
+    font-size: 1.7em;
     vertical-align: bottom;
 }
 
 .bigtitle {
     @include title;
-    font-size: 2.5em;
+    font-size: 2em;
 }
 
 @mixin titleh1 {
     font-family: 'Viga', sans-serif;
-    font-size: 2em;
+    font-size: 1.7em;
     color: $black;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -42,8 +42,17 @@ nav>a {
 
 .main_title {
     font-family: 'Viga', sans-serif;
-    font-size: 2em;
+    font-size: 1.7em;
     color: $black;
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+.login_text{
+    font-family: 'Viga', sans-serif;
+    color: $yellow;
+    font-size: 1em;
+    margin-right: 0;
+    text-align: right;
+    padding-left: 20px;
 }

@@ -9,7 +9,7 @@ use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use  Faker;
+use Faker;
 
 
 class SeasonFixtures extends Fixture  implements DependentFixtureInterface
